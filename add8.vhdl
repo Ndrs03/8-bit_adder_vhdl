@@ -1,5 +1,6 @@
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
+USE ieee.std_logic_unsigned.ALL;
 
 ENTITY add8 IS
     PORT (
@@ -18,9 +19,9 @@ ARCHITECTURE struct OF add8 IS
 
     SIGNAL carry : STD_LOGIC_VECTOR(7 DOWNTO 0);
 BEGIN
-    carry(0) <= cin;
-    sum(0) <= a(0) XOR b(0) XOR carry(0);
-    
+    --carry(0) <= cin;
+
+    u0 : fa PORT MAP(a(0), b(0), cin, sum(0), carry(0));
     u1 : fa PORT MAP(a(1), b(1), carry(0), sum(1), carry(1));
     u2 : fa PORT MAP(a(2), b(2), carry(1), sum(2), carry(2));
     u3 : fa PORT MAP(a(3), b(3), carry(2), sum(3), carry(3));
@@ -29,12 +30,16 @@ BEGIN
     u6 : fa PORT MAP(a(6), b(6), carry(5), sum(6), carry(6));
     u7 : fa PORT MAP(a(7), b(7), carry(6), sum(7), carry(7));
 
-
-    --T_LABEL : FOR i IN 1 TO 7 GENERATE
-      --  u1 : fa PORT MAP(a(i), b(i), carry(i - 1), sum(i), carry(i));
-    --END GENERATE;
-
-
     cout <= carry(7);
 END struct;
-
+ARCHITECTURE add8_behave OF add8 IS
+BEGIN
+    PROCESS (a, b)
+        VARIABLE temp : STD_LOGIC_VECTOR(8 DOWNTO 0);
+    BEGIN
+        temp := ('0' & a) + ('0' & b);
+        sum <= temp(7 DOWNTO 0);
+        cout <= temp(7) XOR a(7) XOR b(7) XOR temp(8);
+    END PROCESS;
+END add8_behave;
+--assert false report "Assignment statement not executed" severity error;

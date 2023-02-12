@@ -1,10 +1,14 @@
 v 4
-file . "adder_tb.vhdl" "547a7962304df2adb32cac0b322a7387cc83d2de" "20230210122305.249":
-  entity eight_bit_full_adder_tb at 1( 0) + 0 on 179;
-  architecture behavioral of eight_bit_full_adder_tb at 7( 108) + 0 on 180;
-file . "adder.vhdl" "b24e93ec1e6693dc9a875483d57c5070f8359c96" "20230210122305.222":
-  entity fa at 1( 0) + 0 on 175;
-  architecture struct of fa at 9( 130) + 0 on 176;
-file . "add8.vhdl" "c8ba3aa228391835541a458b47656ccb154600b6" "20230210122305.236":
-  entity add8 at 1( 0) + 0 on 177;
-  architecture struct of add8 at 12( 236) + 0 on 178;
+file . "add8behave.vhdl" "e4395f6d25c89930d805741a0ea1c4aaa48e3671" "20230212193533.152":
+  entity add8_behave at 1( 0) + 0 on 1005;
+  architecture add8_behave of add8_behave at 15( 285) + 0 on 1006;
+file . "add8.vhdl" "50a087157a2cdacf33fc3ec56ac7229f9053724e" "20230212194234.392":
+  entity add8 at 1( 0) + 0 on 1016;
+  architecture struct of add8 at 13( 269) + 0 on 1017;
+  architecture add8_behave of add8 at 37( 1038) + 0 on 1018;
+file . "adder.vhdl" "b24e93ec1e6693dc9a875483d57c5070f8359c96" "20230212194234.380":
+  entity fa at 1( 0) + 0 on 1014;
+  architecture struct of fa at 9( 130) + 0 on 1015;
+file . "adder_tb.vhdl" "91b2f8262a86fd9ba68fbe36da01f93c8a61141e" "20230212194234.405":
+  entity add8_tb at 1( 0) + 0 on 1019;
+  architecture behave of add8_tb at 10( 153) + 0 on 1020;

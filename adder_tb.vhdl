@@ -1,49 +1,33 @@
-library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
+LIBRARY IEEE;
+USE work.ALL;
+USE IEEE.STD_LOGIC_1164.ALL;
+USE IEEE.STD_LOGIC_UNSIGNED.ALL;
+USE IEEE.STD_LOGIC_ARITH.ALL;
 
-entity eight_bit_full_adder_tb is
-end eight_bit_full_adder_tb;
+ENTITY add8_tb IS
+END add8_tb;
 
-architecture behavioral of eight_bit_full_adder_tb is
-  component add8 is
-    Port ( a : in  STD_LOGIC_VECTOR (7 downto 0);
-           b : in  STD_LOGIC_VECTOR (7 downto 0);
-           cin : in  STD_LOGIC;
-           sum : out  STD_LOGIC_VECTOR (7 downto 0);
-           cout : out  STD_LOGIC);
-  end component;
+ARCHITECTURE behave OF add8_tb IS
+  SIGNAL a_in, b_in, s_behave, s_struct : STD_LOGIC_VECTOR(7 DOWNTO 0);
+  SIGNAL c_in : STD_LOGIC := '0';
+  SIGNAL cout_behave, cout_struct : STD_LOGIC;
 
-  signal a, b, sum : STD_LOGIC_VECTOR (7 downto 0);
-  signal cin, cout : STD_LOGIC;
+BEGIN
 
-begin
+  add8_0 : ENTITY work.add8(struct) PORT MAP (a_in, b_in, c_in, s_struct, cout_struct);
+  add8_1 : ENTITY work.add8(add8_behave) PORT MAP (a_in, b_in, c_in, s_behave, cout_behave);
+  PROCESS
 
-  DUT: add8 port map (a, b, cin, sum, cout);
+    VARIABLE a_vector, b_vector : STD_LOGIC_VECTOR(7 DOWNTO 0) := (OTHERS => '0');
+  BEGIN -- process
 
-  process is
-  begin
-    a <= "10101010";
-    b <= "01010101";
-    cin <= '0';
-    wait for 10 ns;
+    FOR a_vector IN 0 TO 255 LOOP
+      FOR b_vector IN 0 TO 255 LOOP
+        a_in <= conv_std_logic_vector(a_vector, 8);
+        b_in <= conv_std_logic_vector(b_vector, 8);
+        WAIT FOR 10 ns;
+      END LOOP; -- b_vector
+    END LOOP; -- a_vector
+  END PROCESS;
 
-    a <= "00000000";
-    b <= "01010101";
-    cin <= '0';
-    wait for 10 ns;
-
-    a <= "00000000";
-    b <= "00000000";
-    cin <= '0';
-    wait for 10 ns;
-
-    a <= "00000101";
-    b <= "00001010";
-    cin <= '0';
-    wait for 10 ns;
-    
-   
-    wait;
-  end process;
-
-end behavioral;
+END behave;
