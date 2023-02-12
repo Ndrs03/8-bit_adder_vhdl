@@ -19,8 +19,6 @@ ARCHITECTURE struct OF add8 IS
 
     SIGNAL carry : STD_LOGIC_VECTOR(7 DOWNTO 0);
 BEGIN
-    --carry(0) <= cin;
-
     u0 : fa PORT MAP(a(0), b(0), cin, sum(0), carry(0));
     u1 : fa PORT MAP(a(1), b(1), carry(0), sum(1), carry(1));
     u2 : fa PORT MAP(a(2), b(2), carry(1), sum(2), carry(2));
@@ -32,14 +30,15 @@ BEGIN
 
     cout <= carry(7);
 END struct;
+
 ARCHITECTURE add8_behave OF add8 IS
 BEGIN
     PROCESS (a, b)
         VARIABLE temp : STD_LOGIC_VECTOR(8 DOWNTO 0);
     BEGIN
-        temp := ('0' & a) + ('0' & b);
+        temp := ('0' & a) + ('0' & b); -- lägger till en '0' framför a och b vektorn innan addition ifall det blir overflow
         sum <= temp(7 DOWNTO 0);
-        cout <= temp(7) XOR a(7) XOR b(7) XOR temp(8);
+        cout <= temp(7) XOR a(7) XOR b(7) XOR temp(8); -- kan kanske skrivas som bara temp(8) men orkar in kolla
     END PROCESS;
 END add8_behave;
---assert false report "Assignment statement not executed" severity error;
+--assert false report "Assignment statement not executed" severity error;   -- för att debbuga kod, klistra in och terminalen skriver om den stöter på linjen
