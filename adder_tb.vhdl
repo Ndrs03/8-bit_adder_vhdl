@@ -23,7 +23,7 @@ BEGIN
 			FOR b_vector IN 0 TO 255 LOOP
 				a_in <= conv_std_logic_vector(a_vector, 8);
 				b_in <= conv_std_logic_vector(b_vector, 8);
-				WAIT FOR 10 ns;
+				WAIT FOR 1 ns;
 			END LOOP; -- b_vector
 		END LOOP; -- a_vector
 	END PROCESS;
