@@ -10,7 +10,7 @@ all:
 	@$(GHDL) -a -fsynopsys $(FLAGS) add8.vhdl
 	@$(GHDL) -a -fsynopsys $(FLAGS) $(TESTBENCH_INPUT_NAME).vhdl
 	@$(GHDL) -e -fsynopsys $(FLAGS) $(TESTBENCH_ENTITY_NAME)
-	@$(GHDL) -r -fsynopsys $(FLAGS) $(TESTBENCH_ENTITY_NAME) --stop-time=100us --wave=wave.ghw
+	@$(GHDL) -r -fsynopsys $(FLAGS) $(TESTBENCH_ENTITY_NAME) --stop-time=1000us --wave=wave.ghw
 
 wave:
 	gtkwave wave.ghw

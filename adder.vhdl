@@ -1,13 +1,14 @@
-library ieee;
-use ieee.std_logic_1164.all;
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
 
-entity fa is
-port (a, b, cin : in std_logic;
-      s, cout : out std_logic);
-end fa;
+ENTITY fa IS
+	PORT (
+		a, b, cin : IN STD_LOGIC;
+		s, cout : OUT STD_LOGIC);
+END fa;
 
-architecture struct of fa is
-begin
-  s <= a xor b xor cin;
-  cout <= (a and b) or (b and cin) or (cin and a);
-end struct;
+ARCHITECTURE struct OF fa IS
+BEGIN
+	s <= a XOR b XOR cin;
+	cout <= (a AND b) OR (b AND cin) OR (cin AND a);
+END struct;
