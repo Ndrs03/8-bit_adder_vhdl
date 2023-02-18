@@ -33,10 +33,10 @@ END struct;
 
 ARCHITECTURE add8_behave OF add8 IS
 BEGIN
-	PROCESS (a, b)
+	PROCESS (a, b, cin)
 		VARIABLE temp : STD_LOGIC_VECTOR(8 DOWNTO 0);
 	BEGIN
-		temp := ('0' & a) + ('0' & b); -- lägger till en '0' framför a och b vektorn innan addition ifall det blir overflow
+		temp := ('0' & a) + ('0' & b) + ('0' & '0' & '0' & '0' & '0' & '0' & '0' & cin); -- lägger till en '0' framför a och b vektorn innan addition ifall det blir overflow
 		sum <= temp(7 DOWNTO 0);
 		cout <= temp(8);
 	END PROCESS;
